@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FITT Group — Analisi di Mercato & Digital Intelligence · Marzo 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --r:#E52217;--dk:#191919;--lgt:#F4F5F6;--gry:#595959;--wht:#fff;
+    --grn:#118541;--blu:#5781FF;--prp:#551FC4;--ros:#CE2A59;--orn:#DB5E29;
+    --r100:#FF5147;--r50:#FFB8B4;--r20:#FFE0DF;--r10:#FFF0EF;
+    --border:#E8E9EA;
+  }
+  body{font-family:'Figtree',sans-serif;background:#fff;color:var(--gry);font-size:12px;line-height:1.7}
+  
+  /* LAYOUT */
+  .wrap{max-width:860px;margin:0 auto;padding:40px 32px}
+  
+  /* HEADER */
+  .doc-header{background:var(--dk);padding:36px 40px;margin-bottom:0;border-radius:0}
+  .doc-header-inner{max-width:860px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+  .header-logo img{height:26px;filter:brightness(0) invert(1)}
+  .header-meta{text-align:right}
+  .header-meta .date{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .header-meta .author{font-size:11px;color:rgba(255,255,255,.35)}
+  .doc-title-bar{background:var(--r);padding:20px 40px}
+  .doc-title-bar-inner{max-width:860px;margin:0 auto}
+  .doc-title{font-size:22px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.04em;line-height:1.2}
+  .doc-subtitle{font-size:12px;color:rgba(255,255,255,.75);margin-top:4px;font-weight:400}
+
+  /* SECTION LABELS */
+  .section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--r);margin:36px 0 14px;padding-bottom:6px;border-bottom:2px solid var(--r20)}
+  .section-num{display:inline-block;background:var(--r);color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;margin-right:6px;letter-spacing:.06em}
+
+  /* TYPOGRAPHY */
+  h2{font-size:18px;font-weight:700;color:var(--dk);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px}
+  h3{font-size:13px;font-weight:700;color:var(--dk);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  p{font-size:12px;color:var(--gry);line-height:1.75;margin-bottom:12px}
+  strong{color:var(--dk);font-weight:700}
+  .text-red{color:var(--r)}
+
+  /* KPI CARDS */
+  .kpi-row{display:grid;gap:10px;margin-bottom:24px}
+  .kpi-row-4{grid-template-columns:repeat(4,1fr)}
+  .kpi-row-5{grid-template-columns:repeat(5,1fr)}
+  .kpi-row-3{grid-template-columns:repeat(3,1fr)}
+  .kpi{background:var(--lgt);border-radius:10px;padding:16px 14px;position:relative;overflow:hidden}
+  .kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--r)}
+  .kpi-n{font-size:28px;font-weight:700;color:var(--dk);line-height:1.1}
+  .kpi-n-sm{font-size:22px;font-weight:700;color:var(--dk);line-height:1.1}
+  .kpi-l{font-size:10px;color:var(--gry);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+  .kpi-sub{font-size:11px;color:var(--gry);margin-top:3px}
+  .kpi-trend-up{color:var(--grn);font-size:10px;font-weight:700}
+  .kpi-trend-dn{color:var(--r);font-size:10px;font-weight:700}
+  .kpi-accent{border-left-color:var(--blu)}
+  .kpi-accent::before{background:var(--blu)}
+  .kpi-grn::before{background:var(--grn)}
+
+  /* PANELS */
+  .panel{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px}
+  .panel-dark{background:var(--dk);border-color:var(--dk)}
+  .panel-red{border-left:3px solid var(--r);background:var(--r10);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:14px}
+  .panel-title{font-size:12px;font-weight:700;color:var(--dk);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .panel-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+  /* TABLES */
+  .table-wrap{overflow-x:auto;margin-bottom:4px}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gry);padding:9px 12px;text-align:left;border-bottom:2px solid var(--border);white-space:nowrap}
+  td{padding:8px 12px;color:var(--dk);border-bottom:1px solid var(--lgt);vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--lgt)}
+  .td-num{font-weight:700;color:var(--dk)}
+  .td-red{color:var(--r);font-weight:700}
+  .td-grn{color:var(--grn);font-weight:700}
+  .td-orn{color:var(--orn);font-weight:600}
+  .td-gry{color:var(--gry)}
+
+  /* BARS */
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .bar-label{font-size:12px;color:var(--gry);min-width:160px;flex-shrink:0}
+  .bar-label-sm{min-width:110px}
+  .bar-track{flex:1;height:8px;background:var(--lgt);border-radius:4px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:4px;transition:width .3s}
+  .bar-val{font-size:12px;font-weight:600;color:var(--dk);min-width:52px;text-align:right}
+
+  /* PILLS & TAGS */
+  .pill{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+  .pill-red{background:#fdecea;color:var(--r)}
+  .pill-grn{background:#e8f5ee;color:var(--grn)}
+  .pill-blu{background:#eef1ff;color:var(--blu)}
+  .pill-orn{background:#fdf0e9;color:var(--orn)}
+  .pill-gry{background:#f0f0f0;color:var(--gry)}
+  .pill-prp{background:#f0ebff;color:var(--prp)}
+  .tag-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+
+  /* INSIGHT BOX */
+  .insight-box{background:var(--r10);border-left:3px solid var(--r);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+  .insight-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--r);margin-bottom:5px}
+  .insight-text{font-size:12px;color:var(--dk);line-height:1.65}
+  .insight-box-blu{border-left-color:var(--blu);background:#eef1ff33}
+
+  /* GRID */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .divider{width:100%;height:1px;background:var(--border);margin:18px 0}
+
+  /* SWOT */
+  .swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:4px;border-radius:10px;overflow:hidden}
+  .swot-cell{padding:18px;min-height:160px}
+  .swot-s{background:#e8f5ee}
+  .swot-w{background:var(--r10)}
+  .swot-o{background:#eef1ff}
+  .swot-t{background:#fdf0e9}
+  .swot-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .swot-label-dot{width:8px;height:8px;border-radius:50%}
+  .swot-item{font-size:11px;color:var(--dk);padding:4px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;gap:6px;line-height:1.5}
+  .swot-item:last-child{border-bottom:none}
+  .swot-bullet{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0;margin-top:6px}
+
+  /* RECS */
+  .rec-item{display:flex;gap:14px;padding:16px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;transition:border-color .2s}
+  .rec-item:hover{border-color:var(--r)}
+  .rec-num{font-size:22px;font-weight:700;color:var(--r10);letter-spacing:-.02em;flex-shrink:0;min-width:28px;line-height:1;color:var(--r20)}
+  .rec-body{}
+  .rec-title{font-size:13px;font-weight:700;color:var(--dk);margin-bottom:4px}
+  .rec-desc{font-size:12px;color:var(--gry);line-height:1.65;margin-bottom:8px}
+  .rec-meta{display:flex;flex-wrap:wrap;gap:6px}
+
+  /* CHART WRAP */
+  .chart-wrap{position:relative;height:220px;margin:10px 0}
+
+  /* QUOTE */
+  .quote-box{border-left:3px solid var(--gry);padding:10px 14px;margin:14px 0;background:var(--lgt);border-radius:0 8px 8px 0}
+  .quote-text{font-size:12px;color:var(--dk);font-style:italic;line-height:1.6}
+  .quote-source{font-size:10px;color:var(--gry);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+
+  /* FOOTER */
+  .doc-footer{margin-top:48px;padding-top:20px;border-top:2px solid var(--lgt);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--gry)}
+  .doc-footer img{height:18px;opacity:.5}
+
+  /* GEO BARS */
+  .geo-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+  .geo-name{font-size:12px;color:var(--dk);min-width:100px;font-weight:500}
+  .geo-pct{font-size:11px;color:var(--gry);min-width:44px;text-align:right}
+
+  /* BADGE */
+  .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .badge{font-size:11px;font-weight:600;padding:5px 10px;border-radius:6px;background:var(--lgt);color:var(--dk)}
+  .badge-r{background:var(--r);color:#fff}
+
+  /* TIMELINE */
+  .timeline{margin:14px 0}
+  .tl-item{display:flex;gap:12px;margin-bottom:12px;position:relative}
+  .tl-item::before{content:'';position:absolute;left:15px;top:26px;bottom:-12px;width:1px;background:var(--border)}
+  .tl-item:last-child::before{display:none}
+  .tl-dot{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;background:var(--r)}
+  .tl-content{}
+  .tl-title{font-size:12px;font-weight:700;color:var(--dk);margin-bottom:2px}
+  .tl-text{font-size:11px;color:var(--gry);line-height:1.55}
+
+  @media(max-width:640px){
+    .kpi-row-4,.kpi-row-5{grid-template-columns:repeat(2,1fr)}
+    .two-col,.three-col,.swot-grid{grid-template-columns:1fr}
+  }
+  @media print{
+    .doc-header,.doc-title-bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .panel{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-header-inner">
+    <div class="header-logo">
+      <img src="https://mocainteractive.com/assets/svg/logo-light.svg" alt="Moca Interactive">
+    </div>
+    <div class="header-meta">
+      <div class="date">Marzo 2026</div>
+      <div class="author">Elaborato da Moca Interactive</div>
+    </div>
+  </div>
+</div>
+<div class="doc-title-bar">
+  <div class="doc-title-bar-inner">
+    <div class="doc-title">FITT Group — Analisi di Mercato & Digital Intelligence</div>
+    <div class="doc-subtitle">Analisi strategica del posizionamento digitale, del mercato di riferimento e delle opportunità di crescita · Marzo 2026</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════ SEZ. 1 — EXECUTIVE SUMMARY ══════════════ -->
+<div class="section-label"><span class="section-num">01</span>Executive Summary</div>
+
+<div class="kpi-row kpi-row-5">
+  <div class="kpi">
+    <div class="kpi-n">€215M</div>
+    <div class="kpi-l">Fatturato 2024</div>
+    <div class="kpi-sub kpi-trend-up">Utile +18% YoY</div>
+  </div>
+  <div class="kpi kpi-accent">
+    <div class="kpi-n">270K</div>
+    <div class="kpi-l">Visite/anno sito</div>
+    <div class="kpi-sub kpi-trend-dn">-22.4% ultimo mese</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-n">2.293</div>
+    <div class="kpi-l">ETV SEO Italia</div>
+    <div class="kpi-sub">71 kw top-10</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-n">$11,8B</div>
+    <div class="kpi-l">Mercato globale tubi</div>
+    <div class="kpi-sub">CAGR 3% → 2030</div>
+  </div>
+  <div class="kpi kpi-grn">
+    <div class="kpi-n">0</div>
+    <div class="kpi-l">Menzioni Reddit</div>
+    <div class="kpi-sub">Su 8+ subreddit analizzati</div>
+  </div>
+</div>
+
+<div class="panel">
+  <h3>Sintesi strategica</h3>
+  <p>FITT S.p.A. è un'azienda manifatturiera di eccellenza, fondata nel 1969 a Sandrigo (Vicenza), che ha costruito in oltre cinquant'anni un posizionamento di rilievo globale nella produzione di soluzioni termoplastiche per il passaggio di fluidi. Con un fatturato 2024 di <strong>€215,1 milioni</strong> e una redditività in crescita (utile netto +18% YoY, da €7,7M a €9,1M), l'azienda dimostra una solidità operativa importante, nonostante il calo del fatturato rispetto al picco 2022 di €242M.</p>
+  <p>Il posizionamento digitale presenta <strong>luci e ombre significative</strong>. Sul fronte della forza, FITT gode di una visibilità organica discreta in Italia e in Francia, di una presenza SEO brand solida negli USA (24 keyword in posizione 1) e di una strategia ADV su Google che copre 13 mercati con 74 creative. Il traffico USA è il secondo per volume (21%) con una durata media di visita superiore alla media (2:18 minuti).</p>
+  <p>I gap critici sono però altrettanto evidenti: <strong>zero presenze organiche su Reddit</strong> in un mercato B2C che parla ogni giorno dei problemi che FITT risolve, un traffico sito in calo del 22,4%, una presenza SEO in Germania praticamente inesistente (ETV 75 contro 2.293 in Italia), una strategia Meta interamente orientata all'employer branding senza alcuna campagna prodotto, e un budget PPC stimato di soli <strong>$272/anno</strong> che risulta del tutto sproporzionato rispetto alle ambizioni di internazionalizzazione del brand.</p>
+  <p>Il mercato di riferimento è in espansione strutturale: il segmento dei tubi flessibili mostra un CAGR atteso del 12,95% fino al 2033, mentre le normative europee ESPR e il Digital Product Passport possono trasformarsi da vincolo burocratico a vantaggio competitivo per un'azienda già certificata B Corp. Le opportunità di crescita sono concrete, prioritizzabili e direttamente aggredibili con azioni digitali strutturate.</p>
+</div>
+
+
+<!-- ══════════════ SEZ. 2 — PROFILO AZIENDALE ══════════════ -->
+<div class="section-label"><span class="section-num">02</span>Profilo Aziendale</div>
+
+<div class="two-col">
+  <div class="panel">
+    <h3>Dati aziendali FITT S.p.A.</h3>
+    <table>
+      <tbody>
+        <tr><td style="color:var(--gry);width:50%">Ragione sociale</td><td class="td-num">FITT S.p.A. Soc. Unipersonale</td></tr>
+        <tr><td style="color:var(--gry)">P.IVA</td><td>00162620249</td></tr>
+        <tr><td style="color:var(--gry)">Sede</td><td>Sandrigo (VI), Veneto</td></tr>
+        <tr><td style="color:var(--gry)">Fondazione</td><td class="td-num">1969</td></tr>
+        <tr><td style="color:var(--gry)">Fatturato 2024</td><td class="td-num">€ 215.135.613</td></tr>
+        <tr><td style="color:var(--gry)">Utile 2024</td><td class="td-grn">€ 9.102.334</td></tr>
+        <tr><td style="color:var(--gry)">Dipendenti</td><td class="td-num">684</td></tr>
+        <tr><td style="color:var(--gry)">Codice ATECO</td><td>22.21 — Fabbricazione lastre, fogli, tubi, profilati in materie plastiche</td></tr>
+        <tr><td style="color:var(--gry)">Certificazioni</td><td><span class="pill pill-grn">B Corp</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <h3>Settori di attività</h3>
+    <p>FITT opera su tre macro-segmenti di mercato con gamme di prodotto distinte e posizionamenti differenziati:</p>
+    <div class="bar-row"><span class="bar-label bar-label-sm">Domestico (garden)</span><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--grn)"></div></div><span class="bar-val">~55%</span></div>
+    <div class="bar-row"><span class="bar-label bar-label-sm">Professionale</span><div class="bar-track"><div class="bar-fill" style="width:30%;background:var(--blu)"></div></div><span class="bar-val">~30%</span></div>
+    <div class="bar-row"><span class="bar-label bar-label-sm">Industriale</span><div class="bar-track"><div class="bar-fill" style="width:15%;background:var(--prp)"></div></div><span class="bar-val">~15%</span></div>
+    <p style="margin-top:10px;font-size:11px">Note: stime indicative basate sul posizionamento di prodotto e SEO. Il professionale include piscine e agricoltura. L'industriale copre applicazioni fluidiche B2B.</p>
+  </div>
+</div>
+
+<!-- Andamento finanziario -->
+<div class="panel">
+  <h3>Andamento fatturato e utile/perdita (2022–2024)</h3>
+  <p style="margin-bottom:14px">I dati di bilancio pubblicamente disponibili coprono il triennio 2022–2024. Per gli anni 2017–2021 i dati sono presenti nella fonte ma accessibili solo con abbonamento al registro aziende. Il trend recente mostra un calo del fatturato dopo il picco 2022, con un utile in recupero progressivo.</p>
+  <div class="chart-wrap" style="height:200px">
+    <canvas id="chartFatturato"></canvas>
+  </div>
+  <div class="three-col" style="margin-top:14px">
+    <div class="kpi" style="background:var(--lgt)">
+      <div class="kpi-n-sm">€242,2M</div>
+      <div class="kpi-l">Fatturato 2022</div>
+      <div class="kpi-sub" style="color:var(--grn)">Utile: €5,5M</div>
+    </div>
+    <div class="kpi" style="background:var(--lgt)">
+      <div class="kpi-n-sm">€223,5M</div>
+      <div class="kpi-l">Fatturato 2023</div>
+      <div class="kpi-sub" style="color:var(--grn)">Utile: €7,7M</div>
+    </div>
+    <div class="kpi" style="background:var(--lgt)">
+      <div class="kpi-n-sm">€215,1M</div>
+      <div class="kpi-l">Fatturato 2024</div>
+      <div class="kpi-sub" style="color:var(--grn)">Utile: €9,1M</div>
+    </div>
+  </div>
+  <div class="insight-box" style="margin-top:14px">
+    <div class="insight-label">Lettura del trend</div>
+    <div class="insight-text">Il fatturato è calato del 11,2% dal 2022 al 2024, un calo che riflette il raffreddamento della domanda post-pandemia nel mercato giardinaggio, l'inflazione sui materiali e la pressione competitiva. Tuttavia, la <strong>redditività sta migliorando</strong>: l'utile è cresciuto da €5,5M (2022) a €9,1M (2024), indicando un'efficienza operativa in aumento e un miglioramento del mix di prodotto. Il margine netto è passato da 2,3% a 4,2%.</div>
+  </div>
+</div>
+
+<div class="panel">
+  <h3>Posizionamento competitivo e sostenibilità</h3>
+  <p>FITT ha costruito nel corso degli anni un posizionamento distintivo che va oltre le performance finanziarie. La certificazione <strong>B Corp</strong> e il percorso di sostenibilità (Vision 2033) rappresentano asset differenzianti in un mercato sempre più regolato dalle normative ESG europee. L'azienda ha pubblicato bilanci di sostenibilità dal 2020 in poi, un segnale di anticipazione rispetto ai nuovi obblighi CSRD.</p>
+  <div class="two-col">
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gry);margin-bottom:8px">Punti di forza strutturali</div>
+      <div style="font-size:12px;color:var(--dk);line-height:1.8">
+        <span class="pill pill-grn" style="margin-right:4px;margin-bottom:4px;display:inline-block">B Corp certificata</span>
+        <span class="pill pill-blu" style="margin-right:4px;margin-bottom:4px;display:inline-block">Fondazione 1969</span>
+        <span class="pill pill-grn" style="margin-right:4px;margin-bottom:4px;display:inline-block">Produzione 100% italiana</span>
+        <span class="pill pill-blu" style="margin-right:4px;margin-bottom:4px;display:inline-block">Presenza in 13+ mercati</span>
+        <span class="pill pill-prp" style="margin-right:4px;margin-bottom:4px;display:inline-block">R&D materiali avanzati</span>
+        <span class="pill pill-grn" style="margin-right:4px;margin-bottom:4px;display:inline-block">Bilanci sostenibilità dal 2020</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gry);margin-bottom:8px">Principali competitor globali</div>
+      <div style="font-size:12px;color:var(--dk);line-height:1.8">Parker Hannifin, Continental AG, Trelleborg, Gates Corporation, Alfa Gomma, IVG Colbachini. Il mercato è moderatamente frammentato con la presenza di grandi player multinazionali e attori regionali specializzati. FITT si posiziona nella fascia premium del mercato europeo con leva sulla qualità dei materiali e sulla sostenibilità certificata.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SEZ. 3 — MERCATO ══════════════ -->
+<div class="section-label"><span class="section-num">03</span>Mercato di Riferimento</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt);margin-top:-10px">3A — Scenario Macroeconomico</div>
+
+<div class="panel">
+  <h3>Dimensioni e proiezioni del mercato globale</h3>
+  <div class="kpi-row kpi-row-4" style="margin-bottom:14px">
+    <div class="kpi"><div class="kpi-n">$11,8B</div><div class="kpi-l">Tubi industriali 2024</div></div>
+    <div class="kpi kpi-accent"><div class="kpi-n">$13,9B</div><div class="kpi-l">Proiezione 2030</div><div class="kpi-sub">CAGR 3%</div></div>
+    <div class="kpi"><div class="kpi-n">$15,3B</div><div class="kpi-l">Tubi flessibili totale 2024</div></div>
+    <div class="kpi kpi-grn"><div class="kpi-n">$57,2B</div><div class="kpi-l">Proiezione 2033</div><div class="kpi-sub">CAGR 12,95%</div></div>
+  </div>
+  <p>Il segmento dei tubi flessibili è il più dinamico e quello più rilevante per FITT: la crescita attesa a un CAGR del 12,95% fino al 2033 è trainata dalla domanda industriale, agricola e domestica nei mercati emergenti, ma anche da una progressiva sostituzione dei materiali rigidi con soluzioni flessibili e ad alte prestazioni nei mercati maturi europei. In Europa, il mercato TPU (poliuretano termoplastico) vale €1,10 miliardi nel 2025 e dovrebbe raggiungere €1,67 miliardi nel 2034.</p>
+  
+  <h3 style="margin-top:14px">Segmentazione per materiali</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Materiale</th><th>Quota mercato</th><th>CAGR stimato</th><th>Caratteristiche chiave</th><th>Rilevanza FITT</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gomma naturale/sintetica</strong></td><td class="td-num">39–42%</td><td class="td-orn">~3,5%</td><td>Resilienza, tenuta termica, applicazioni industriali</td><td><span class="pill pill-blu">Media</span></td></tr>
+        <tr><td><strong>PVC flessibile</strong></td><td class="td-num">~28%</td><td class="td-orn">~2,8%</td><td>Basso costo, versatilità, mercato residenziale</td><td><span class="pill pill-red">Alta</span></td></tr>
+        <tr><td><strong>Poliuretano (TPU)</strong></td><td class="td-num">~18%</td><td class="td-grn">~8,5%</td><td>Leggerezza, resistenza abrasione, settore premium</td><td><span class="pill pill-red">Molto alta</span></td></tr>
+        <tr><td><strong>Polietilene (PE/HDPE)</strong></td><td class="td-num">~8%</td><td class="td-orn">~4,2%</td><td>Irrigazione agricola, infrastrutture idriche</td><td><span class="pill pill-blu">Media</span></td></tr>
+        <tr><td><strong>Ibridi e compositi</strong></td><td class="td-num">~4%</td><td class="td-grn">~12%</td><td>Applicazioni speciali, alta pressione, chimico</td><td><span class="pill pill-grn">Emergente</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="insight-box insight-box-blu" style="margin-top:12px">
+    <div class="insight-label">Posizionamento materiali FITT</div>
+    <div class="insight-text">FITT opera prevalentemente nei segmenti PVC flessibile (prodotti garden entry-level e professionali) e TPU (gamma Force Pro, premium). Il TPU è il segmento con il CAGR più elevato del settore, posizionando FITT sul lato giusto della curva di crescita. L'investimento in materiali ibridi e ad alte prestazioni sarà determinante per mantenere margini premium nei prossimi 5–7 anni.</div>
+  </div>
+</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt)">3B — Mercato Italiano ed Europeo</div>
+
+<div class="two-col">
+  <div class="panel">
+    <h3>Italia — Produzione e posizionamento</h3>
+    <p>Il mercato italiano della produzione manifatturiera di tubi vale <strong>$5,35 miliardi</strong> nel 2025 (dati Statista/Eurostat). La costruzione di infrastrutture per il trasporto di fluidi si attesta a <strong>$2,03 miliardi</strong>, in ripresa rispetto al minimo del 2015. L'Italia è inoltre il primo esportatore europeo di tubi in acciaio verso l'Europa occidentale con <strong>€3,19 miliardi</strong> di export nel 2019.</p>
+    <div class="insight-box" style="margin-top:10px">
+      <div class="insight-label">Driver PNRR</div>
+      <div class="insight-text">Il Piano Nazionale di Ripresa e Resilienza sta generando un +11,4% di investimenti in infrastrutture idriche, con effetti positivi attesi sui segmenti professionale e industriale di FITT.</div>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Germania — Leader produttivo EU</h3>
+    <p>La Germania è il principale produttore europeo di prodotti tubolari, con un output annuo che ha superato i <strong>3,2 milioni di tonnellate</strong> nel picco storico. Seguono Polonia (800–960k t/anno), Austria e Repubblica Ceca.</p>
+    <p>Nonostante sia il mercato di produzione più grande dell'UE, la presenza SEO di FITT.com in Germania è praticamente inesistente (<strong>ETV 75</strong> contro 2.293 in Italia), con soli 2 keyword in posizione 1–3. Il gap tra potenziale di mercato e presenza digitale è il più critico identificato in questa analisi.</p>
+  </div>
+</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt)">3C — Segmenti Strategici per FITT</div>
+
+<div class="three-col">
+  <div class="panel">
+    <div class="panel-dot" style="background:var(--grn);display:inline-block;width:8px;height:8px;border-radius:2px;margin-bottom:6px"></div>
+    <h3>Giardinaggio & Irrigazione</h3>
+    <p>Il mercato europeo dei sistemi di microirrigazione vale <strong>$2,23 miliardi</strong> nel 2025 e crescerà fino a <strong>$3,34 miliardi</strong> nel 2030 (CAGR 8,4%). La domanda è trainata dalla sostenibilità idrica, dai sistemi smart irrigation (IoT, sensori umidità) e dal trend del giardinaggio lifestyle post-pandemia.</p>
+    <p>FITT presidia questo segmento con la gamma più ampia di prodotti, ma la brand awareness nei mercati anglofoni (UK, USA) è quasi nulla al di fuori degli utenti già informati.</p>
+  </div>
+  <div class="panel">
+    <div class="panel-dot" style="background:var(--blu);display:inline-block;width:8px;height:8px;border-radius:2px;margin-bottom:6px"></div>
+    <h3>Piscine & Professionale</h3>
+    <p>Il mercato europeo delle piscine e spa vale <strong>€7,29 miliardi</strong>. In Italia, il mercato delle piscine vale circa <strong>€4 miliardi</strong> con indotto. La crescita è sostenuta dal settore turistico-ricettivo (+30% domanda HoReCa) e dal residenziale premium.</p>
+    <p>I professionisti del settore cercano affidabilità, resistenza al cloro e velocità di installazione. La keyword "resistenza al cloro piscine" è già la principale parola chiave non branded nel traffico organico di FITT (26,67% share).</p>
+  </div>
+  <div class="panel">
+    <div class="panel-dot" style="background:var(--prp);display:inline-block;width:8px;height:8px;border-radius:2px;margin-bottom:6px"></div>
+    <h3>Industriale & B2B</h3>
+    <p>Il mercato globale dei tubi industriali vale <strong>$11,81 miliardi</strong> nel 2024. La domanda è trainata dall'automotive (Germania, Polonia), dal chimico, dall'alimentare e dalle costruzioni. Il CAGR del 3% è più moderato ma su volumi assoluti elevati.</p>
+    <p>Il segmento industriale è quello più strategico per la marginalità: i buyer B2B cercano continuità operativa e riduzione del downtime, non il prezzo. FITT può posizionarsi su affidabilità e certificazione come fattori critici di scelta.</p>
+  </div>
+</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt)">3D — Framework Normativo Europeo</div>
+
+<div class="panel">
+  <h3>Normative chiave e impatto su FITT</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">ESPR</div>
+      <div class="tl-content">
+        <div class="tl-title">Ecodesign for Sustainable Products Regulation — luglio 2024</div>
+        <div class="tl-text">Introduce requisiti stringenti su durabilità, riparabilità e facilità di riciclo dei prodotti. Per FITT: <strong>opportunità</strong> di certificare la longevità dei prodotti premium (FITT Force) come vantaggio competitivo documentato. Richiede tracciabilità del ciclo di vita e impone la progettazione per il disassemblaggio.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">DPP</div>
+      <div class="tl-content">
+        <div class="tl-title">Digital Product Passport — componente ESPR, attuazione progressiva</div>
+        <div class="tl-text">Identificatore digitale che traccia materiali, impronta di carbonio, modalità di smaltimento. Per FITT: <strong>vantaggio di marketing unico</strong> per certificare autenticità e sostenibilità direttamente sul punto vendita digitale. Le aziende già B Corp hanno un head start nell'implementazione.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">GCD</div>
+      <div class="tl-content">
+        <div class="tl-title">Green Claims Directive — gennaio 2024</div>
+        <div class="tl-text">Proibisce affermazioni ambientali vaghe ("sostenibile", "biodegradabile") senza certificazione ufficiale. Per FITT: la certificazione B Corp e i bilanci di sostenibilità già esistenti rendono l'azienda conforme. I competitor non certificati dovranno adeguarsi, creando un vantaggio temporaneo.</div>
+      </div>
+    </div>
+    <div class="tl-item" style="margin-bottom:0">
+      <div class="tl-dot">CSRD</div>
+      <div class="tl-content">
+        <div class="tl-title">Corporate Sustainability Reporting Directive — bilanci 2024</div>
+        <div class="tl-text">Obbliga circa 50.000 aziende europee a riportare dati dettagliati sulla sostenibilità (emissioni Scope 1, 2, 3). FITT rientra nelle soglie dimensionali. I bilanci di sostenibilità già pubblicati dal 2020 facilitano il percorso di compliance, ma sarà necessaria una maggiore granularità sui dati di filiera.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SEZ. 4 — ANALISI DIGITALE ══════════════ -->
+<div class="section-label"><span class="section-num">04</span>Analisi Digitale — Traffico e Posizionamento</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt);margin-top:-10px">4A — Panoramica Traffico (SimilarWeb)</div>
+
+<div class="kpi-row kpi-row-4">
+  <div class="kpi"><div class="kpi-n">270K</div><div class="kpi-l">Visite totali (annuo)</div><div class="kpi-sub kpi-trend-dn">-22,4% vs mese prec.</div></div>
+  <div class="kpi kpi-accent"><div class="kpi-n">22.510</div><div class="kpi-l">Media mensile visite</div><div class="kpi-sub">11.555 visitatori unici</div></div>
+  <div class="kpi"><div class="kpi-n">42,5%</div><div class="kpi-l">Bounce rate globale</div><div class="kpi-sub">53,28% in Italia</div></div>
+  <div class="kpi"><div class="kpi-n">2,20</div><div class="kpi-l">Pagine/visita media</div><div class="kpi-sub">Durata: 01:05 min</div></div>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <h3>Mix canali di acquisizione</h3>
+    <div style="margin-top:4px">
+      <div class="bar-row"><span class="bar-label bar-label-sm">Direct</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:var(--dk)"></div></div><span class="bar-val">33,02%</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Organic Search</span><div class="bar-track"><div class="bar-fill" style="width:31%;background:var(--grn)"></div></div><span class="bar-val">30,86%</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Paid Search</span><div class="bar-track"><div class="bar-fill" style="width:24%;background:var(--r)"></div></div><span class="bar-val">23,63%</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Social</span><div class="bar-track"><div class="bar-fill" style="width:8%;background:#E1306C"></div></div><span class="bar-val">7,85%</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Referral</span><div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--blu)"></div></div><span class="bar-val">4,28%</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Display</span><div class="bar-track"><div class="bar-fill" style="width:1%;background:var(--orn)"></div></div><span class="bar-val">0,33%</span></div>
+    </div>
+    <div class="insight-box" style="margin-top:12px">
+      <div class="insight-label">Anomalia Paid Search</div>
+      <div class="insight-text">Il Paid Search vale il 23,63% del traffico ma con una spesa stimata di soli <strong>$272 annui</strong> e un costo per visita pagata di $0,05. Questo dato è quasi certamente una sottostima di SimilarWeb, poiché un budget reale così basso non potrebbe generare 63.838 visite/anno. La stima SimilarWeb sui budget PPC è notoriamente inaccurata per brand con presenza multi-mercato.</div>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Top mercati per traffico</h3>
+    <div class="geo-row"><span class="geo-name">Italia</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--r)"></div></div><span class="geo-pct">30,71%</span></div>
+    <div class="geo-row"><span class="geo-name">USA</span><div class="bar-track"><div class="bar-fill" style="width:68%;background:var(--blu)"></div></div><span class="geo-pct">20,99%</span></div>
+    <div class="geo-row"><span class="geo-name">Spagna</span><div class="bar-track"><div class="bar-fill" style="width:34%;background:var(--orn)"></div></div><span class="geo-pct">10,57%</span></div>
+    <div class="geo-row"><span class="geo-name">Francia</span><div class="bar-track"><div class="bar-fill" style="width:31%;background:var(--prp)"></div></div><span class="geo-pct">9,55%</span></div>
+    <div class="geo-row"><span class="geo-name">Regno Unito</span><div class="bar-track"><div class="bar-fill" style="width:26%;background:var(--grn)"></div></div><span class="geo-pct">7,91%</span></div>
+    <div class="geo-row"><span class="geo-name">Germania</span><div class="bar-track"><div class="bar-fill" style="width:19%;background:#888"></div></div><span class="geo-pct">5,98%</span></div>
+    <div class="insight-box" style="margin-top:10px">
+      <div class="insight-label">Variazioni critiche</div>
+      <div class="insight-text">Spagna: <span class="kpi-trend-dn">-96,15%</span> · UK: <span class="kpi-trend-dn">-80,57%</span> · Polonia: <span class="kpi-trend-dn">-48,54%</span>. Segnali di possibili problemi tecnici, penalità o discontinuità nelle campagne ADV in questi mercati.</div>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <h3>Device split e engagement per paese</h3>
+  <div class="two-col">
+    <div>
+      <div class="bar-row"><span class="bar-label">Mobile web</span><div class="bar-track"><div class="bar-fill" style="width:65%;background:var(--r)"></div></div><span class="bar-val">64,67%</span></div>
+      <div class="bar-row"><span class="bar-label">Desktop</span><div class="bar-track"><div class="bar-fill" style="width:35%;background:var(--dk)"></div></div><span class="bar-val">35,33%</span></div>
+      <p style="margin-top:8px;font-size:11px">La prevalenza mobile (65%) è coerente con un pubblico consumer B2C, ma pone interrogativi sull'ottimizzazione UX del sito per dispositivi mobili, considerato il bounce rate del 53% in Italia.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Paese</th><th>Durata visita</th><th>Bounce rate</th></tr></thead>
+        <tbody>
+          <tr><td>USA</td><td class="td-grn">02:18</td><td>51,86%</td></tr>
+          <tr><td>Francia</td><td>02:01</td><td>44,81%</td></tr>
+          <tr><td>Spagna</td><td>01:32</td><td>43,96%</td></tr>
+          <tr><td>Italia</td><td>01:42</td><td class="td-red">53,28%</td></tr>
+          <tr><td>Germania</td><td>01:22</td><td class="td-grn">36,99%</td></tr>
+          <tr><td>UK</td><td class="td-red">00:33</td><td>38,92%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt)">4B — Benchmark Competitivo Traffico</div>
+
+<div class="panel">
+  <h3>fitt.com vs competitor per traffico annuo</h3>
+  <div style="margin:10px 0 14px">
+    <div class="bar-row"><span class="bar-label">molecor.com</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--r)"></div></div><span class="bar-val" style="color:var(--r);font-weight:700">350.452</span></div>
+    <div class="bar-row"><span class="bar-label">fitt.com</span><div class="bar-track"><div class="bar-fill" style="width:77%;background:var(--dk)"></div></div><span class="bar-val">270.121</span></div>
+    <div class="bar-row"><span class="bar-label">fs-sintez.ru</span><div class="bar-track"><div class="bar-fill" style="width:73%;background:var(--gry)"></div></div><span class="bar-val">257.420</span></div>
+    <div class="bar-row"><span class="bar-label">valrom.ro</span><div class="bar-track"><div class="bar-fill" style="width:58%;background:var(--gry)"></div></div><span class="bar-val">203.914</span></div>
+    <div class="bar-row"><span class="bar-label">apollopipes.com</span><div class="bar-track"><div class="bar-fill" style="width:56%;background:var(--gry)"></div></div><span class="bar-val">197.337</span></div>
+  </div>
+  <p>FITT si posiziona al secondo posto per traffico nel panel di competitor analizzato, con un gap del 23% rispetto al leader molecor.com. Il confronto è significativo perché Molecor è un produttore spagnolo focalizzato su tubi PVC orientati (molecor.com è fortemente ottimizzato per il mercato iberico), il che suggerisce che con una strategia SEO e ADV strutturata FITT potrebbe ambire alla leadership di traffico nel medio termine.</p>
+  <div class="insight-box insight-box-blu">
+    <div class="insight-label">Nota competitiva</div>
+    <div class="insight-text">fs-sintez.ru è un produttore russo (visite principalmente da mercati CIS, non competitivo direttamente in Europa occidentale). valrom.ro è un produttore rumeno. apollopipes.com è indiano. FITT è di fatto il solo produttore dell'Europa occidentale nel panel, il che rende il confronto solo parzialmente significativo. Competitor europei reali come Parker Hannifin, Continental o Trelleborg hanno siti corporate con traffico difficilmente comparabile su base diretta.</div>
+  </div>
+</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt)">4C — Analisi SEO Organica (DataForSEO)</div>
+
+<div class="kpi-row kpi-row-5">
+  <div class="kpi"><div class="kpi-n">2.293</div><div class="kpi-l">ETV Italia</div><div class="kpi-sub">260 kw totali · 71 top-10</div></div>
+  <div class="kpi kpi-accent"><div class="kpi-n">1.050</div><div class="kpi-l">ETV USA</div><div class="kpi-sub">173 kw · 30 top-3</div></div>
+  <div class="kpi"><div class="kpi-n">1.014</div><div class="kpi-l">ETV Francia</div><div class="kpi-sub">163 kw · 42 top-10</div></div>
+  <div class="kpi"><div class="kpi-n">239</div><div class="kpi-l">ETV UK</div><div class="kpi-sub">65 kw · 21 top-10</div></div>
+  <div class="kpi" style="border-left-color:var(--gry);opacity:.8"><div class="kpi-n" style="color:var(--gry)">75</div><div class="kpi-l">ETV Germania</div><div class="kpi-sub">72 kw · 0 pos.1</div></div>
+</div>
+
+<div class="panel">
+  <h3>Keyword strategiche per mercato</h3>
+  <div class="two-col">
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gry);margin-bottom:8px">Italia — Keyword principali</div>
+      <table>
+        <thead><tr><th>Pos.</th><th>Keyword</th><th>Volume</th></tr></thead>
+        <tbody>
+          <tr><td class="td-grn">1</td><td>fitt spa</td><td>1.900</td></tr>
+          <tr><td>2</td><td>tubi giardino</td><td>1.900</td></tr>
+          <tr><td>4</td><td>tubazione per irrigazione</td><td>4.400</td></tr>
+          <tr><td>5</td><td>tubazione pvc</td><td>2.900</td></tr>
+          <tr><td>7</td><td>impronta carbonica</td><td>1.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gry);margin-bottom:8px">USA — Keyword principali</div>
+      <table>
+        <thead><tr><th>Pos.</th><th>Keyword</th><th>Volume</th></tr></thead>
+        <tbody>
+          <tr><td class="td-grn">1</td><td>fitt hose</td><td>480</td></tr>
+          <tr><td class="td-grn">1</td><td>fitt hiflo hose</td><td>320</td></tr>
+          <tr><td class="td-grn">1</td><td>fitt force pro hose</td><td>260</td></tr>
+          <tr><td>3</td><td>fitt (brand)</td><td>5.400</td></tr>
+          <tr><td>6</td><td>garden hose sizes chart</td><td>320</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="three-col">
+    <div class="insight-box">
+      <div class="insight-label">Italia: mercato principale</div>
+      <div class="insight-text">IT genera il 44% dell'ETV totale stimato. Il brand è ben radicato su keyword prodotto ad alta stagionalità. Picco estivo (giugno–luglio) con volumi fino a 14.800/mese su "tubazione per irrigazione".</div>
+    </div>
+    <div class="insight-box">
+      <div class="insight-label">USA: brand-first, zero generic</div>
+      <div class="insight-text">30 keyword in pos. 1–3 negli USA, ma quasi tutte branded. Nessun posizionamento su "garden hose", "irrigation hose", "expandable hose": segmenti non-branded con volumi enormi.</div>
+    </div>
+    <div class="insight-box" style="border-left-color:var(--r);background:#fdecea">
+      <div class="insight-label" style="color:var(--r)">Germania: gap critico</div>
+      <div class="insight-text">ETV 75 contro 2.293 in Italia. Zero keyword in pos. 1. La Germania è il più grande mercato B2B di tubi in Europa ma FITT è quasi invisibile digitalmente. Gap immediato da aggredire.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt)">4D — Opportunità e Rischi SEO</div>
+
+<div class="panel">
+  <h3>Analisi strutturale SEO — opportunità e rischi</h3>
+  <div class="two-col">
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--grn);margin-bottom:8px">Opportunità</div>
+      <div style="font-size:12px;color:var(--dk);line-height:1.75">
+        <strong>Localizzazione tedesca.</strong> Con una spesa SEO mirata su DE (contenuti tecnici in tedesco, link building su media settore), FITT potrebbe raggiungere un ETV di 800+ in 12 mesi su un mercato con capacità di spesa B2B elevatissima.<br><br>
+        <strong>Non-branded USA.</strong> Il traffico USA è dominato da keyword branded: aggredire termini generici come "garden hose", "flexible irrigation hose" o "expandable hose durability" su usa.fitt.com potrebbe raddoppiare l'ETV americano.<br><br>
+        <strong>Keyword sostenibilità.</strong> "Impronta carbonica" già in pos. 7 con 1.000 ricerche/mese è un segnale: FITT può creare un cluster di contenuti ESG che intercetta il pubblico professionale sensibile alle normative ESPR/CSRD.<br><br>
+        <strong>Long-tail tecnico.</strong> Keyword a coda lunga su specifiche materiali (resistenza TPU, tubi alimentari certificati, tubi piscine in PA) hanno volume basso ma intent di acquisto molto elevato.
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--r);margin-bottom:8px">Rischi</div>
+      <div style="font-size:12px;color:var(--dk);line-height:1.75">
+        <strong>Architettura multi-dominio.</strong> fitt.com, shop.fitt.com, bluforce.fitt.com, usa.fitt.com frammentano l'autorità del dominio principale. Ogni sottodominio costruisce trust separatamente, rallentando la crescita organica complessiva.<br><br>
+        <strong>Calo keyword pos. 1-3 in Italia.</strong> Il dato SimilarWeb di febbraio 2026 mostra un -26,67% MoM nelle keyword italiane in posizione 1-3. Un segnale preoccupante che richiede monitoraggio e possibile intervento tecnico.<br><br>
+        <strong>Brand dominance vulnerabile.</strong> Se un competitor (Gardena, Hozelock, Flexzilla) investe in campagne brand bidding sulle keyword FITT negli USA, la dipendenza da traffico branded diventa un rischio immediato.<br><br>
+        <strong>Stagionalità non gestita.</strong> Il picco estivo crea grandi fluttuazioni nel traffico organico. Senza contenuti evergreen che mantengano il posizionamento nei mesi invernali, il sito perde authority progressivamente.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SEZ. 5 — ANALISI ADV ══════════════ -->
+<div class="section-label"><span class="section-num">05</span>Analisi ADV — Meta + Google</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt);margin-top:-10px">5A — Meta Ads</div>
+
+<div class="panel">
+  <h3>Strategia attuale Meta Ads (mar 2025 – mar 2026)</h3>
+  <div class="two-col">
+    <div>
+      <div class="kpi-row kpi-row-3" style="margin-bottom:10px">
+        <div class="kpi" style="padding:12px"><div class="kpi-n" style="font-size:22px">36</div><div class="kpi-l">Inserzioni attive</div></div>
+        <div class="kpi" style="padding:12px"><div class="kpi-n" style="font-size:22px">72%</div><div class="kpi-l">Solo Instagram</div></div>
+        <div class="kpi" style="padding:12px"><div class="kpi-n" style="font-size:22px">0</div><div class="kpi-l">Campagne prodotto</div></div>
+      </div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Carosello</span><div class="bar-track"><div class="bar-fill" style="width:58%;background:var(--r)"></div></div><span class="bar-val">21 ads</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Video</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:var(--r100)"></div></div><span class="bar-val">12 ads</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">DCO / Event</span><div class="bar-track"><div class="bar-fill" style="width:6%;background:var(--r50)"></div></div><span class="bar-val">2 ads</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Page Like</span><div class="bar-track"><div class="bar-fill" style="width:3%;background:var(--r20)"></div></div><span class="bar-val">1 ad</span></div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gry);margin-bottom:8px">Temi e obiettivi</div>
+      <div class="badge-row">
+        <span class="badge" style="background:#fdecea;color:var(--r)">Employer Branding</span>
+        <span class="badge" style="background:#e8f5ee;color:var(--grn)">B Corp / Sostenibilità</span>
+        <span class="badge" style="background:#eef1ff;color:var(--blu)">DEI (Diversity)</span>
+        <span class="badge">Vision 2033</span>
+        <span class="badge">Talent Attraction</span>
+      </div>
+      <p style="margin-top:10px">La strategia Meta di FITT è interamente orientata all'<strong>employer branding e alla corporate reputation</strong>. Nessuna delle 36 inserzioni analizzate promuove prodotti o genera traffico verso fitt.com: la destination è esclusivamente il profilo Instagram. Le call-to-action puntano a seguire il profilo, non ad acquistare o scoprire prodotti.</p>
+    </div>
+  </div>
+  <div class="two-col" style="margin-top:0">
+    <div class="insight-box">
+      <div class="insight-label">Cosa funziona</div>
+      <div class="insight-text">Il formato carosello è coerente con lo storytelling multi-slide del brand. La coerenza visiva sul canale Instagram costruisce brand awareness istituzionale e supporta il recruitment. Il tema B Corp/DEI è autenticamente differenziante rispetto ai competitor.</div>
+    </div>
+    <div class="insight-box" style="border-left-color:var(--r);background:#fdecea">
+      <div class="insight-label">Cosa manca</div>
+      <div class="insight-text">Zero campagne prodotto, zero traffico verso il sito, nessun retargeting visibile, nessuna campagna stagionale (irrigazione estate, preparazione giardino primavera), nessun test su Facebook per il pubblico B2B professionale. Il canale Meta è sprecato come strumento di acquisizione.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt)">5B — Google Ads</div>
+
+<div class="panel">
+  <h3>Strategia Google Ads (mar 2025 – mar 2026)</h3>
+  <div class="two-col">
+    <div>
+      <div class="kpi-row kpi-row-3" style="margin-bottom:10px">
+        <div class="kpi" style="padding:12px"><div class="kpi-n" style="font-size:22px">74</div><div class="kpi-l">Creative Google</div></div>
+        <div class="kpi" style="padding:12px"><div class="kpi-n" style="font-size:22px">5</div><div class="kpi-l">Account advertiser</div></div>
+        <div class="kpi" style="padding:12px"><div class="kpi-n" style="font-size:22px">13</div><div class="kpi-l">Paesi raggiunti</div></div>
+      </div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Search (testo)</span><div class="bar-track"><div class="bar-fill" style="width:51%;background:var(--prp)"></div></div><span class="bar-val">~38 cr.</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">Display (immagine)</span><div class="bar-track"><div class="bar-fill" style="width:30%;background:var(--blu)"></div></div><span class="bar-val">~22 cr.</span></div>
+      <div class="bar-row"><span class="bar-label bar-label-sm">YouTube (video)</span><div class="bar-track"><div class="bar-fill" style="width:19%;background:var(--orn)"></div></div><span class="bar-val">~14 cr.</span></div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gry);margin-bottom:8px">Impression YouTube per paese</div>
+      <div class="geo-row"><span class="geo-name" style="font-size:11px">Cipro</span><div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--r)"></div></div><span class="geo-pct" style="color:var(--r);font-weight:700">1–1,25M</span></div>
+      <div class="geo-row"><span class="geo-name" style="font-size:11px">Irlanda</span><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--orn)"></div></div><span class="geo-pct">60–70k</span></div>
+      <div class="geo-row"><span class="geo-name" style="font-size:11px">Italia</span><div class="bar-track"><div class="bar-fill" style="width:38%;background:var(--orn)"></div></div><span class="geo-pct">40–45k</span></div>
+      <div class="geo-row"><span class="geo-name" style="font-size:11px">Spagna</span><div class="bar-track"><div class="bar-fill" style="width:34%;background:var(--gry)"></div></div><span class="geo-pct">35–40k</span></div>
+      <div class="geo-row"><span class="geo-name" style="font-size:11px">Francia</span><div class="bar-track"><div class="bar-fill" style="width:23%;background:var(--gry)"></div></div><span class="geo-pct">20–25k</span></div>
+      <div class="geo-row"><span class="geo-name" style="font-size:11px">Germania</span><div class="bar-track"><div class="bar-fill" style="width:6%;background:#ccc"></div></div><span class="geo-pct" style="color:var(--gry)">2–3k</span></div>
+    </div>
+  </div>
+  <div class="insight-box" style="margin-top:12px">
+    <div class="insight-label">Anomalia Cipro</div>
+    <div class="insight-text">Cipro registra impression YouTube straordinariamente elevate (fino a 1,25 milioni) rispetto a mercati molto più grandi come Italia e Spagna. Questo è quasi certamente il risultato di un investimento concentrato in un mercato a CPM molto basso (costo per mille impression YouTube a Cipro è notoriamente inferiore ai grandi mercati EU), probabilmente per campagne di brand awareness a budget limitato ma volume elevato. Potrebbe indicare un hub distributivo o una sussidiaria FITT nell'area mediterranea orientale.</div>
+  </div>
+  <div class="divider"></div>
+  <h3>Gap mercati Google Search</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Paese</th><th>Piattaforme attive</th><th>Impression Search (stima)</th><th>Valutazione</th></tr></thead>
+      <tbody>
+        <tr><td>Germania</td><td><span class="pill pill-prp">Search</span></td><td class="td-orn">2.000–4.000</td><td>Investimento insufficiente per il più grande mercato B2B EU</td></tr>
+        <tr><td>Belgio</td><td><span class="pill pill-prp">Search</span></td><td class="td-gry">0–1.000</td><td>Presenza minima, campagna quasi inattiva</td></tr>
+        <tr><td>Paesi Bassi</td><td><span class="pill pill-prp">Search</span></td><td class="td-gry">0–1.000</td><td>BeNeLux substimato rispetto al potenziale</td></tr>
+        <tr><td>UK</td><td><span class="pill pill-prp">Search</span> <span class="pill pill-gry">Display</span> <span class="pill pill-orn">YouTube</span></td><td class="td-red">Quasi zero</td><td>Molti creative, impression irrilevanti: campagna sospesa o non performante</td></tr>
+        <tr><td>Australia</td><td><span class="pill pill-prp">Search</span> <span class="pill pill-gry">Display</span></td><td class="td-red">Quasi zero</td><td>Attività fino a giugno 2025, poi interruzione</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section-label" style="font-size:9px;color:var(--gry);border-bottom-color:var(--lgt)">5C — Matrice Posizionamento ADV</div>
+
+<div class="panel">
+  <h3>Cosa presidia FITT vs cosa lascia scoperto</h3>
+  <div class="two-col">
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--grn);margin-bottom:8px">FITT presidia</div>
+      <div class="badge-row" style="flex-direction:column;gap:6px;align-items:flex-start">
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-grn" style="margin-right:6px">OK</span>Brand awareness istituzionale (Meta, employer branding)</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-grn" style="margin-right:6px">OK</span>YouTube brand video su mercati mediterranei</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-grn" style="margin-right:6px">OK</span>Google Search su IT/ES/FR per prodotti core</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-grn" style="margin-right:6px">OK</span>Posizionamento B Corp/DEI nel segmento talent</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-grn" style="margin-right:6px">OK</span>Diversificazione tra Search, Display e YouTube</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--r);margin-bottom:8px">FITT lascia scoperto</div>
+      <div class="badge-row" style="flex-direction:column;gap:6px;align-items:flex-start">
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-red" style="margin-right:6px">GAP</span>Campagne prodotto su Meta (zero acquisition)</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-red" style="margin-right:6px">GAP</span>Retargeting sito verso visitatori non convertiti</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-red" style="margin-right:6px">GAP</span>Mercati UK, DACH, BeNeLux con ADV efficace</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-red" style="margin-right:6px">GAP</span>Campagne stagionali (primavera/estate garden)</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-red" style="margin-right:6px">GAP</span>Traffic verso il sito da Social (CTA a fitt.com)</span>
+        <span style="font-size:12px;color:var(--dk)"><span class="pill pill-red" style="margin-right:6px">GAP</span>Shopping/performance campaigns su prodotto</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SEZ. 6 — REDDIT ══════════════ -->
+<div class="section-label"><span class="section-num">06</span>Sentiment e Conversazioni Online (Reddit)</div>
+
+<div class="kpi-row kpi-row-4">
+  <div class="kpi" style="border-left-color:var(--r)"><div class="kpi-n" style="color:var(--r)">0</div><div class="kpi-l">Menzioni FITT</div><div class="kpi-sub">Su 8+ subreddit analizzati</div></div>
+  <div class="kpi kpi-accent"><div class="kpi-n">906K</div><div class="kpi-l">Iscritti r/gardening</div><div class="kpi-sub">Audience target primaria</div></div>
+  <div class="kpi"><div class="kpi-n">5+</div><div class="kpi-l">Competitor citati</div><div class="kpi-sub">Gilmour, Flexzilla, Eley...</div></div>
+  <div class="kpi"><div class="kpi-n">8+</div><div class="kpi-l">Subreddit analizzati</div><div class="kpi-sub">B2C e B2B professionali</div></div>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <h3>Cluster conversazione B2C</h3>
+    <table>
+      <thead><tr><th>Tema</th><th>Intensità</th><th>FITT fit</th></tr></thead>
+      <tbody>
+        <tr><td>Qualità e durabilità</td><td><span class="pill pill-red">Alta</span></td><td class="td-grn">FITT Force, linee premium</td></tr>
+        <tr><td>Kink & storage</td><td><span class="pill pill-red">Alta</span></td><td class="td-grn">Prodotti anti-kink FITT</td></tr>
+        <tr><td>Tubi espandibili</td><td><span class="pill pill-orn">Media</span></td><td class="td-orn">Opportunità differenziaz.</td></tr>
+        <tr><td>DIY Irrigation</td><td><span class="pill pill-orn">Media</span></td><td class="td-grn">Sistemi irrigazione FITT</td></tr>
+        <tr><td>Giardinaggio lifestyle</td><td><span class="pill pill-gry">Emergente</span></td><td class="td-gry">Branded content</td></tr>
+        <tr><td>Gift & frugal</td><td><span class="pill pill-gry">Bassa</span></td><td class="td-gry">Premium gifting</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <h3>Cluster conversazione B2B</h3>
+    <table>
+      <thead><tr><th>Tema</th><th>Intensità</th><th>FITT fit</th></tr></thead>
+      <tbody>
+        <tr><td>Equipment failure & downtime</td><td><span class="pill pill-red">Alta</span></td><td class="td-grn">Affidabilità sistemi</td></tr>
+        <tr><td>Pipe sizing & pressure</td><td><span class="pill pill-red">Alta</span></td><td class="td-grn">Doc tecnica, supporto</td></tr>
+        <tr><td>Automazione & IoT</td><td><span class="pill pill-orn">Media</span></td><td class="td-orn">Segmento adiacente</td></tr>
+        <tr><td>Supplier choice</td><td><span class="pill pill-orn">Media</span></td><td class="td-grn">Thread confronto brand</td></tr>
+        <tr><td>Maintenance & repair</td><td><span class="pill pill-orn">Media</span></td><td class="td-grn">Durabilità, manutenzione</td></tr>
+        <tr><td>Sostenibilità materiali</td><td><span class="pill pill-gry">Emergente</span></td><td class="td-gry">Leva B Corp in B2C</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel">
+  <h3>Il paradosso dell'invisibilità</h3>
+  <p>La ricerca condotta in marzo 2026 su oltre 8 subreddit rilevanti ha rilevato <strong>zero menzioni organiche di FITT</strong> in nessuno dei thread analizzati. Il brand è completamente assente dall'ecosistema di conversazione spontanea, nonostante le community di giardinaggio, irrigazione e sistemi professionali parlino ogni giorno di problemi che FITT risolve direttamente.</p>
+  
+  <div class="quote-box">
+    <div class="quote-text">"The plastic hose reel boxes are garbage and fail prematurely. The expanding hoses, no matter the name or manufacturer, will last two seasons at most."</div>
+    <div class="quote-source">r/HomeImprovement — 12 upvote</div>
+  </div>
+  
+  <div class="quote-box">
+    <div class="quote-text">"I finally ponied up the cash for an Eley free standing hose reel. Mine works really well with a kink proof rubber hose."</div>
+    <div class="quote-source">r/HomeImprovement — risposta a thread su tubi anti-kink</div>
+  </div>
+  
+  <p>Il secondo quote è particolarmente rilevante: l'utente descrive esattamente il prodotto FITT Force ma cita il competitor Eley. Il brand seeding su questi canali non è quindi un problema di domanda inesistente, ma di <strong>mancata presenza FITT nel repertorio dei consumatori</strong>.</p>
+
+  <div class="insight-box">
+    <div class="insight-label">Il segnale sugli espandibili</div>
+    <div class="insight-text">I tubi espandibili sono l'unica categoria con conversazioni polarizzate su Reddit: metà degli utenti li ama per leggerezza e praticità, metà li odia per la bassa durata (massimo 2 stagioni, citata ripetutamente). Il messaggio "non importa la marca, durano comunque poco" è un'apertura diretta per FITT Force, che può posizionarsi come l'eccezione alla regola con dati di durata documentati e certificati.</div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SEZ. 7 — SWOT ══════════════ -->
+<div class="section-label"><span class="section-num">07</span>Analisi SWOT Digitale</div>
+
+<div class="swot-grid">
+  <!-- STRENGTHS -->
+  <div class="swot-cell swot-s">
+    <div class="swot-label" style="color:var(--grn)"><div class="swot-label-dot" style="background:var(--grn)"></div>PUNTI DI FORZA</div>
+    <div class="swot-item" style="color:var(--grn)"><div class="swot-bullet"></div><span>Fatturato €215M con utile in crescita (+18% YoY): base finanziaria solida per investimenti digitali</span></div>
+    <div class="swot-item" style="color:var(--grn)"><div class="swot-bullet"></div><span>Certificazione B Corp e Vision 2033: vantaggio competitivo autentico in un mercato regolato ESPR</span></div>
+    <div class="swot-item" style="color:var(--grn)"><div class="swot-bullet"></div><span>SEO Italia solida: 71 keyword top-10, ETV 2.293, posizione 1 su keyword branded ad alto volume</span></div>
+    <div class="swot-item" style="color:var(--grn)"><div class="swot-bullet"></div><span>Forte brand awareness USA: 30 keyword in pos. 1–3, presenza su usa.fitt.com</span></div>
+    <div class="swot-item" style="color:var(--grn)"><div class="swot-bullet"></div><span>Presenza ADV in 13 mercati con mix Search + Display + YouTube</span></div>
+    <div class="swot-item" style="color:var(--grn)"><div class="swot-bullet"></div><span>Traffico USA con alta qualità: 2:18 min durata media, bounce rate 51,86%</span></div>
+  </div>
+  <!-- WEAKNESSES -->
+  <div class="swot-cell swot-w">
+    <div class="swot-label" style="color:var(--r)"><div class="swot-label-dot" style="background:var(--r)"></div>PUNTI DI DEBOLEZZA</div>
+    <div class="swot-item" style="color:var(--r)"><div class="swot-bullet"></div><span>Zero menzioni organiche su Reddit: brand invisibile nella conversazione spontanea del pubblico target</span></div>
+    <div class="swot-item" style="color:var(--r)"><div class="swot-bullet"></div><span>Germania: ETV 75, zero posizioni 1. Il più grande mercato B2B EU è digitalmente inesplorato</span></div>
+    <div class="swot-item" style="color:var(--r)"><div class="swot-bullet"></div><span>Meta Ads: 36 inserzioni, zero campagne prodotto, zero traffico verso sito</span></div>
+    <div class="swot-item" style="color:var(--r)"><div class="swot-bullet"></div><span>Calo traffico: -22,4% nell'ultimo mese, -80% UK, -96% Spagna</span></div>
+    <div class="swot-item" style="color:var(--r)"><div class="swot-bullet"></div><span>Architettura multi-dominio che frammenta l'autorità SEO complessiva</span></div>
+    <div class="swot-item" style="color:var(--r)"><div class="swot-bullet"></div><span>USA solo branded: nessun posizionamento su keyword generiche del settore</span></div>
+  </div>
+  <!-- OPPORTUNITIES -->
+  <div class="swot-cell swot-o">
+    <div class="swot-label" style="color:var(--blu)"><div class="swot-label-dot" style="background:var(--blu)"></div>OPPORTUNITÀ</div>
+    <div class="swot-item" style="color:var(--blu)"><div class="swot-bullet"></div><span>ESPR e Digital Product Passport: trasformare compliance in vantaggio competitivo con contenuti certificati</span></div>
+    <div class="swot-item" style="color:var(--blu)"><div class="swot-bullet"></div><span>Mercato tubi flessibili: CAGR 12,95% al 2033, FITT posizionata sul segmento TPU ad alta crescita</span></div>
+    <div class="swot-item" style="color:var(--blu)"><div class="swot-bullet"></div><span>Brand seeding Reddit: spazio completamente libero su community da 906K iscritti nel territorio FITT</span></div>
+    <div class="swot-item" style="color:var(--blu)"><div class="swot-bullet"></div><span>Localizzazione SEO tedesca: zero competitor digitale presente, mercato B2B enorme e non presidiato</span></div>
+    <div class="swot-item" style="color:var(--blu)"><div class="swot-bullet"></div><span>Smart irrigation e IoT: CAGR 8,4% microirrigazione EU, posizionamento "sistema" vs solo prodotto</span></div>
+    <div class="swot-item" style="color:var(--blu)"><div class="swot-bullet"></div><span>PNRR infrastrutture idriche: +11,4% investimenti, domanda professionale IT in crescita</span></div>
+  </div>
+  <!-- THREATS -->
+  <div class="swot-cell swot-t">
+    <div class="swot-label" style="color:var(--orn)"><div class="swot-label-dot" style="background:var(--orn)"></div>MINACCE</div>
+    <div class="swot-item" style="color:var(--orn)"><div class="swot-bullet"></div><span>Competitor US (Flexzilla, Eley, Gilmour) con brand seeding consolidato in community dove FITT è assente</span></div>
+    <div class="swot-item" style="color:var(--orn)"><div class="swot-bullet"></div><span>Brand bidding su keyword FITT da competitor: la dipendenza da traffico branded è un rischio diretto</span></div>
+    <div class="swot-item" style="color:var(--orn)"><div class="swot-bullet"></div><span>Calo fatturato strutturale (-11,2% dal 2022): pressione sui budget marketing in mercati maturi</span></div>
+    <div class="swot-item" style="color:var(--orn)"><div class="swot-bullet"></div><span>Green Claims Directive: competitor potrebbero contestare comunicazioni ambientali non pienamente documentate</span></div>
+    <div class="swot-item" style="color:var(--orn)"><div class="swot-bullet"></div><span>Parker Hannifin, Continental e Trelleborg: player globali con R&D e budget superiori nei segmenti industriali</span></div>
+    <div class="swot-item" style="color:var(--orn)"><div class="swot-bullet"></div><span>Volatilità traffico in Spagna e UK: segnali di instabilità in mercati chiave, causa ancora non identificata</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SEZ. 8 — RACCOMANDAZIONI ══════════════ -->
+<div class="section-label"><span class="section-num">08</span>Raccomandazioni Strategiche</div>
+
+<div class="panel-red">
+  <div class="insight-label">Nota metodologica</div>
+  <div class="insight-text">Le raccomandazioni sono ordinate per priorità strategica, combinando urgenza e impatto atteso. Le indicazioni di tempistica sono orientative e dipendono dalla disponibilità di risorse interne FITT e dall'eventuale coinvolgimento di Moca Interactive nell'execution.</div>
+</div>
+
+<!-- REC 1 -->
+<div class="rec-item">
+  <div class="rec-num" style="font-size:28px;font-weight:700;color:var(--r20)">01</div>
+  <div class="rec-body">
+    <div class="rec-title">Attivare campagne Meta Ads prodotto con traffico verso fitt.com</div>
+    <div class="rec-desc">La presenza Meta di FITT è interamente orientata all'employer branding, senza alcuna campagna prodotto o acquisition. Con 36 inserzioni attive che non generano traffico verso il sito, il canale è di fatto inutilizzato per gli obiettivi commerciali. È necessario costruire una struttura di campagne stagionali (lancio primavera, picco estate, preparazione autunno) con creative prodotto, CTA verso le pagine categoria di fitt.com e almeno una campagna retargeting per visitatori del sito che non hanno convertito. Il formato video su Instagram è già presidio consolidato e può essere riorientato con un cambio di CTA e obiettivo campagna.</div>
+    <div class="rec-meta">
+      <span class="pill pill-red">Quick Win 0-3 mesi</span>
+      <span class="pill pill-gry">Canale: Meta Ads (IG + FB)</span>
+      <span class="pill pill-blu">Obiettivo: traffico qualificato + remarketing</span>
+      <span class="pill pill-grn">KPI: CTR verso sito, costo per visita, ROAS campagna prodotto</span>
+    </div>
+  </div>
+</div>
+
+<!-- REC 2 -->
+<div class="rec-item">
+  <div class="rec-num" style="font-size:28px;font-weight:700;color:var(--r20)">02</div>
+  <div class="rec-body">
+    <div class="rec-title">Avviare un progetto di brand seeding su Reddit (B2C + B2B)</div>
+    <div class="rec-desc">FITT è completamente assente dalle conversazioni organiche su Reddit, dove la community di r/gardening (906k iscritti) discute ogni giorno di durabilità, kink e tubi espandibili: esattamente il territorio del prodotto FITT. La raccomandazione è di avviare una presenza autentica e utile nei subreddit chiave (r/gardening, r/HomeImprovement, r/Irrigation, r/manufacturing), con risposte tecniche genuine ai problemi degli utenti, senza toni promozionali. Nel B2B, i thread su equipment failure in r/manufacturing sono momenti ad alta attenzione dove una presenza brand che porta soluzioni concrete costruisce credibilità professionale rapidamente. Il brand seeding su Reddit è un investimento di medio termine ma con ROI comprovato per brand di prodotto premium.</div>
+    <div class="rec-meta">
+      <span class="pill pill-red">Quick Win 1-3 mesi</span>
+      <span class="pill pill-gry">Canale: Reddit (organic + content)</span>
+      <span class="pill pill-blu">Obiettivo: brand awareness, community trust</span>
+      <span class="pill pill-grn">KPI: menzioni organiche, traffico referral da Reddit, thread partecipati</span>
+    </div>
+  </div>
+</div>
+
+<!-- REC 3 -->
+<div class="rec-item">
+  <div class="rec-num" style="font-size:28px;font-weight:700;color:var(--r20)">03</div>
+  <div class="rec-body">
+    <div class="rec-title">Progetto SEO localizzazione tedesca (mercato DACH)</div>
+    <div class="rec-desc">La Germania è il più grande mercato B2B di tubazioni in Europa (leader EU con 2,5–3,2 milioni di tonnellate/anno) ma FITT ha un ETV organico di appena 75 e zero keyword in posizione 1. Il gap è enorme e la concorrenza digitale locale è bassa. Un progetto strutturato di 6–12 mesi dovrebbe includere: creazione di contenuti product page in tedesco nativamente (non traduzione automatica), link building su media tedeschi di settore (Chemietechnik, MM Maschinenmarkt), ottimizzazione tecnica per .de o sottodominio de.fitt.com, e campagne Google Search in lingua tedesca su keyword chiave (Gartenschlauch, Bewässerungsschlauch, Industrieschlauch). L'obiettivo è raggiungere un ETV 800+ in 12 mesi.</div>
+    <div class="rec-meta">
+      <span class="pill pill-orn">Azione strutturale 3-9 mesi</span>
+      <span class="pill pill-gry">Canale: SEO organico + Google Ads DE</span>
+      <span class="pill pill-blu">Obiettivo: visibilità nel più grande mercato EU inespresso</span>
+      <span class="pill pill-grn">KPI: ETV DE, keyword ranking DACH, traffico organico da Germania</span>
+    </div>
+  </div>
+</div>
+
+<!-- REC 4 -->
+<div class="rec-item">
+  <div class="rec-num" style="font-size:28px;font-weight:700;color:var(--r20)">04</div>
+  <div class="rec-body">
+    <div class="rec-title">Sviluppare una content strategy non-branded per il mercato USA</div>
+    <div class="rec-desc">In USA, FITT ha 30 keyword in posizione 1–3 ma quasi tutte branded. Il potenziale di acquisizione di nuovo traffico è limitato perché chi non conosce già il brand non trova FITT. Una strategia di contenuto su usa.fitt.com focalizzata su keyword generiche ad alto volume (garden hose comparison, expandable hose durability, best garden hose, irrigation hose sizing chart) con un approccio editoriale di tipo "guida all'acquisto" e "comparison tecnico" può intercettare utenti nella fase di ricerca pre-acquisto. Reddit ha già dimostrato che il pubblico americano ha esattamente i pain point che FITT risolve.</div>
+    <div class="rec-meta">
+      <span class="pill pill-orn">Azione strutturale 3-9 mesi</span>
+      <span class="pill pill-gry">Canale: SEO + Content Marketing USA</span>
+      <span class="pill pill-blu">Obiettivo: acquisizione traffico non-branded in mercato ad alto valore</span>
+      <span class="pill pill-grn">KPI: ETV non-branded USA, traffico organico us.fitt.com, keyword pos. 1-10 su generic</span>
+    </div>
+  </div>
+</div>
+
+<!-- REC 5 -->
+<div class="rec-item">
+  <div class="rec-num" style="font-size:28px;font-weight:700;color:var(--r20)">05</div>
+  <div class="rec-body">
+    <div class="rec-title">Indagare e risolvere il calo di traffico in Spagna e UK</div>
+    <div class="rec-desc">Il calo del traffico SimilarWeb in Spagna (-96,15%) e UK (-80,57%) è un segnale critico che richiede un'analisi tecnica urgente. Le cause possibili sono molteplici: interruzione di campagne ADV locali, penalizzazione Google su specifiche URL, problemi tecnici di canonicalizzazione, o semplicemente la fine di una campagna stagionale. Prima di investire in nuovi mercati è necessario capire cosa ha causato questa perdita di volume, verificando via Google Search Console l'andamento dell'indicizzazione per questi mercati e allineando con il team ADV locale sulla storia delle campagne.</div>
+    <div class="rec-meta">
+      <span class="pill pill-red">Quick Win urgente 0-1 mese</span>
+      <span class="pill pill-gry">Canale: SEO tecnico + Analytics</span>
+      <span class="pill pill-blu">Obiettivo: diagnosi e recovery traffico perso</span>
+      <span class="pill pill-grn">KPI: traffico organico UK/ES ripristinato, GSC coverage report</span>
+    </div>
+  </div>
+</div>
+
+<!-- REC 6 -->
+<div class="rec-item">
+  <div class="rec-num" style="font-size:28px;font-weight:700;color:var(--r20)">06</div>
+  <div class="rec-body">
+    <div class="rec-title">Trasformare ESPR e Digital Product Passport in asset di marketing digitale</div>
+    <div class="rec-desc">Le normative europee ESPR (luglio 2024) e il Digital Product Passport trasformeranno la sostenibilità da costo burocratico a vantaggio competitivo per chi si attrezza in anticipo. FITT, già B Corp certificata con bilanci di sostenibilità dal 2020, è nella posizione ideale per essere first mover. La raccomandazione è di costruire una sezione dedicata del sito con la certificazione DPP per le linee premium (FITT Force), creare contenuti SEO sul tema "tubi certificati ESPR" e "Digital Product Passport giardinaggio" intercettando una domanda emergente di professionisti e buyer B2B sensibili alla compliance normativa, e usare le certificazioni come differenziatore nelle campagne Google Display verso un pubblico professionale.</div>
+    <div class="rec-meta">
+      <span class="pill pill-orn">Azione strutturale 6-12 mesi</span>
+      <span class="pill pill-gry">Canale: SEO + Content + Display B2B</span>
+      <span class="pill pill-blu">Obiettivo: leadership tematica su sostenibilità e compliance</span>
+      <span class="pill pill-grn">KPI: traffico su landing ESPR, lead B2B da contenuti certificazione, PR coverage</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Roadmap visuale -->
+<div class="panel">
+  <h3>Roadmap implementazione — priorità temporale</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px">
+    <div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--r);margin-bottom:8px;padding:4px 8px;background:var(--r10);border-radius:4px;display:inline-block">Quick Wins — 0-3 mesi</div>
+      <div style="font-size:12px;color:var(--dk);line-height:1.8">
+        <div style="padding:6px 0;border-bottom:1px solid var(--lgt)"><strong>01.</strong> Attivare campagne Meta Ads prodotto</div>
+        <div style="padding:6px 0;border-bottom:1px solid var(--lgt)"><strong>02.</strong> Avviare brand seeding su Reddit</div>
+        <div style="padding:6px 0"><strong>05.</strong> Diagnosticare calo traffico UK/Spagna</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orn);margin-bottom:8px;padding:4px 8px;background:#fdf0e9;border-radius:4px;display:inline-block">Azioni Strutturali — 3-12 mesi</div>
+      <div style="font-size:12px;color:var(--dk);line-height:1.8">
+        <div style="padding:6px 0;border-bottom:1px solid var(--lgt)"><strong>03.</strong> Progetto SEO localizzazione tedesca</div>
+        <div style="padding:6px 0;border-bottom:1px solid var(--lgt)"><strong>04.</strong> Content strategy non-branded USA</div>
+        <div style="padding:6px 0"><strong>06.</strong> ESPR/DPP come asset marketing</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <img src="https://mocainteractive.com/assets/svg/logo.svg" alt="Moca Interactive">
+  <span>Elaborato da Moca Interactive · Fonti: SimilarWeb, DataForSEO, Meta Ads Library, Google Ads Transparency, Reddit MCP, Statista, Eurostat, Prometeia, RegistroAziende.it · Marzo 2026</span>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// CHART FATTURATO
+const ctx = document.getElementById('chartFatturato');
+if(ctx){
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['2022','2023','2024'],
+      datasets: [
+        {
+          label: 'Fatturato (M€)',
+          data: [242.2, 223.5, 215.1],
+          backgroundColor: ['#E52217','#E52217','#E52217'],
+          borderRadius: 4,
+          yAxisID: 'y'
+        },
+        {
+          label: 'Utile netto (M€)',
+          data: [5.5, 7.7, 9.1],
+          backgroundColor: ['#118541','#118541','#118541'],
+          borderRadius: 4,
+          yAxisID: 'y2'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index' },
+      plugins: {
+        legend: { labels: { font: { family: 'Figtree', size: 11 }, color: '#595959' } }
+      },
+      scales: {
+        y: {
+          type: 'linear',
+          position: 'left',
+          ticks: { font: { family: 'Figtree', size: 10 }, color: '#595959', callback: v => '€' + v + 'M' },
+          grid: { color: '#F4F5F6' },
+          min: 180
+        },
+        y2: {
+          type: 'linear',
+          position: 'right',
+          ticks: { font: { family: 'Figtree', size: 10 }, color: '#118541', callback: v => '€' + v + 'M' },
+          grid: { display: false }
+        },
+        x: { ticks: { font: { family: 'Figtree', size: 11 }, color: '#595959' }, grid: { display: false } }
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
